@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SpawnBomb : MonoBehaviour {
 
-	bool canBomb = true;
+
+	public bool canBomb = true;
+	public bool canBombEx = false;
 	public GameObject bomb;
+	public GameObject BombEx;
 	public int amount = 0;
+	public int maxAmt = 3;
 
 	// Use this for initialization
 	void Start () {
@@ -27,20 +31,30 @@ public class SpawnBomb : MonoBehaviour {
 
 	void SpawnBomber()
 	{
-		if (amount <= 3 && canBomb)
+		if (amount <= maxAmt && canBomb)
 		{
+			if(!canBombEx){
 
-			Instantiate(bomb,transform.position, transform.rotation);
+				Instantiate(bomb,transform.position, transform.rotation);
+			}
+
+			else if(canBombEx){
+			
+				Instantiate(BombEx,transform.position, transform.rotation);
+			}
+
 			amount++;
 			canBomb = false;
 			StartCoroutine("BombCooldown");
 
 		}
-		else if (amount > 3)
+		else if (amount > maxAmt)
 		{
 			Debug.Log("Too many bombs");
 		}
 	}
+
+
 	void OnGUI()
 	{
 		GUI.Box(new Rect(Screen.width / 2 - 300, Screen.width / 2 - 400, 50, 30), amount.ToString());
@@ -52,6 +66,7 @@ public class SpawnBomb : MonoBehaviour {
 		yield return new WaitForSeconds(0.75f);
 		canBomb = true;
 	}
+
 	
 
 }

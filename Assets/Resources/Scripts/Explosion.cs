@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Explosion : MonoBehaviour {
 
+	public bool soundVol = false;
 	// Use this for initialization
 	void Start () {
 
@@ -34,6 +35,8 @@ public class Explosion : MonoBehaviour {
 		}
 
 	}
+	
+
 
 	IEnumerator DespawnExplosion (){
 
