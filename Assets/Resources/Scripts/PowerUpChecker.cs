@@ -32,7 +32,6 @@ public class PowerUpChecker : MonoBehaviour {
 		if(col.gameObject.name == "SilentBomb")
 		{
 			bomb.GetComponent<Bomb>().silBombEnabled = true;
-			bomb.GetComponent<BombEx>().silentBombEnabledEx = true;
 		}
 	}
 }
