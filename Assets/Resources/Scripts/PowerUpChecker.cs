@@ -5,6 +5,8 @@ public class PowerUpChecker : MonoBehaviour {
 
 	public GameObject bomb;
 	public GameObject bombEx;
+	public GameObject explosion;
+	public GameObject silentexplosion;
 
 	// Use this for initialization
 	void Start () {
@@ -50,9 +52,23 @@ public class PowerUpChecker : MonoBehaviour {
 			StartCoroutine("SmallExplosion");
 		}
 
+		if(col.gameObject.name == "SoundIncrease")
+		{
+			Debug.Log("Power Down Collected");
+			StartCoroutine("SoundInc");
+		}
+
 
 	}
 
+	IEnumerator SoundInc (){
+		
+		explosion.GetComponent<AudioSource>().maxDistance = 100f;
+		silentexplosion.GetComponent<AudioSource>().maxDistance = 100f;
+		yield return new WaitForSeconds(5.5f);
+		explosion.GetComponent<AudioSource>().maxDistance = 5f;
+		silentexplosion.GetComponent<AudioSource>().maxDistance = 5f;
+	}
 	
 	IEnumerator SmallExplosion (){
 		
