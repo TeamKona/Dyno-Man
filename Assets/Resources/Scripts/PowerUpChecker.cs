@@ -64,10 +64,17 @@ public class PowerUpChecker : MonoBehaviour {
 	IEnumerator SoundInc (){
 		
 		explosion.GetComponent<AudioSource>().maxDistance = 100f;
+		explosion.GetComponent<ParticleSystem>().startSize = 10f;
+
 		silentexplosion.GetComponent<AudioSource>().maxDistance = 100f;
-		yield return new WaitForSeconds(5.5f);
+		silentexplosion.GetComponent<ParticleSystem>().startSize = 10f;
+
+		yield return new WaitForSeconds(25.5f);
+
 		explosion.GetComponent<AudioSource>().maxDistance = 5f;
+		explosion.GetComponent<ParticleSystem>().startSize = 0.5f;
 		silentexplosion.GetComponent<AudioSource>().maxDistance = 5f;
+		silentexplosion.GetComponent<ParticleSystem>().startSize = 0.5f;
 	}
 	
 	IEnumerator SmallExplosion (){
