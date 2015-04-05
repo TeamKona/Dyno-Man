@@ -8,15 +8,16 @@ public class Explosion : MonoBehaviour {
 	void Start () {
 
 		StartCoroutine("DespawnExplosion");
-
+		gameObject.GetComponent<AudioSource>().volume = 0.25f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
 	void OnTriggerStay (Collider col)
 	{
+
 
 		if(col.gameObject.tag == "Combustible")
 		{

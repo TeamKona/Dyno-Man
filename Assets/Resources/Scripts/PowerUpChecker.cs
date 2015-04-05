@@ -26,12 +26,31 @@ public class PowerUpChecker : MonoBehaviour {
 
 		if(col.gameObject.name == "PowerUpBombAmtEx")
 		{
+			Debug.Log("Power Up Collected");
 			GameObject.Find("Player").GetComponent<SpawnBomb>().maxAmt = 5;
 		}
 
 		if(col.gameObject.name == "SilentBomb")
 		{
+			Debug.Log("Power Up Collected");
 			bomb.GetComponent<Bomb>().silBombEnabled = true;
 		}
+
+		if(col.gameObject.name == "SpeedReduce")
+		{
+			Debug.Log("Power Down Collected");
+			StartCoroutine("SpeedDown");
+
+		}
+
+
 	}
+	
+	IEnumerator SpeedDown (){
+
+		GameObject.Find("Player").GetComponent<PlayerMovement>().speed = 150f;
+		yield return new WaitForSeconds(5.5f);
+		GameObject.Find("Player").GetComponent<PlayerMovement>().speed = 400f;
+	}
+
 }
