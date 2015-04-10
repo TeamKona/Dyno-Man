@@ -10,7 +10,19 @@ public class PowerUpChecker : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
+		bomb = Resources.Load<GameObject>("Prefabs/Bomb");
+		bombEx = Resources.Load<GameObject>("Prefabs/BombEx");
+
+		explosion.GetComponent<AudioSource>().maxDistance = 5f;
+		explosion.GetComponent<ParticleSystem>().startSize = 0.5f;
+		silentexplosion.GetComponent<AudioSource>().maxDistance = 5f;
+		silentexplosion.GetComponent<ParticleSystem>().startSize = 0.5f;
+		bomb.GetComponent<Bomb>().expAreaNorm = 3;
+		bombEx.GetComponent<BombEx>().expArea = 4;
+		GameObject.Find("Player").GetComponent<PlayerMovement>().speed = 300f;
+		bomb.GetComponent<Bomb>().silBombEnabled = false;
+		GameObject.Find("Player").GetComponent<SpawnBomb>().canBombEx = false;
 	}
 	
 	// Update is called once per frame
@@ -21,40 +33,73 @@ public class PowerUpChecker : MonoBehaviour {
 
 	void OnTriggerStay(Collider col){
 		
-		if(col.gameObject.name == "PowerUpBombEx"){
+		if(col.gameObject.name == "PowerUpBombEx(Clone)"){
 
-			Debug.Log("Power Up Collected");
+			Debug.Log("Blast Up");
+			GameObject.Find("Player").GetComponent<SpawnBomb>().canBombEx = true;
+			GameObject.Destroy(col.gameObject);
+		}
+		if(col.gameObject.name == "PowerUpBombEx"){
+			
+			Debug.Log("Blast Up");
 			GameObject.Find("Player").GetComponent<SpawnBomb>().canBombEx = true;
 		}
 
-		if(col.gameObject.name == "PowerUpBombAmtEx")
-		{
-			Debug.Log("Power Up Collected");
+		if(col.gameObject.name == "PowerUpBombAmtEx(Clone)"){
+			Debug.Log("Bomb Up");
+			GameObject.Find("Player").GetComponent<SpawnBomb>().maxAmt = 5;
+			GameObject.Destroy(col.gameObject);
+		}
+		if(col.gameObject.name == "PowerUpBombAmtEx"){
+			Debug.Log("Bomb Up");
 			GameObject.Find("Player").GetComponent<SpawnBomb>().maxAmt = 5;
 		}
 
+		if(col.gameObject.name == "SilentBomb(Clone)")
+		{
+			Debug.Log("Sound Down");
+			bomb.GetComponent<Bomb>().silBombEnabled = true;
+			GameObject.Destroy(col.gameObject);
+		}
 		if(col.gameObject.name == "SilentBomb")
 		{
-			Debug.Log("Power Up Collected");
+			Debug.Log("Sound Down");
 			bomb.GetComponent<Bomb>().silBombEnabled = true;
 		}
 
+		if(col.gameObject.name == "SpeedReduce(Clone)")
+		{
+			Debug.Log("Speed Down");
+			StartCoroutine("SpeedDown");
+			GameObject.Destroy(col.gameObject);
+		}
 		if(col.gameObject.name == "SpeedReduce")
 		{
-			Debug.Log("Power Down Collected");
+			Debug.Log("Speed Down");
 			StartCoroutine("SpeedDown");
-
 		}
 
+		if(col.gameObject.name == "ExplosionReduction(Clone)")
+		{
+			Debug.Log("Blast Down");
+			StartCoroutine("SmallExplosion");
+			GameObject.Destroy(col.gameObject);
+		}
 		if(col.gameObject.name == "ExplosionReduction")
 		{
-			Debug.Log("Power Down Collected");
+			Debug.Log("Blast Down");
 			StartCoroutine("SmallExplosion");
 		}
 
+		if(col.gameObject.name == "SoundIncrease(Clone)")
+		{
+			Debug.Log("Sound Up");
+			StartCoroutine("SoundInc");
+			GameObject.Destroy(col.gameObject);
+		}
 		if(col.gameObject.name == "SoundIncrease")
 		{
-			Debug.Log("Power Down Collected");
+			Debug.Log("Sound Up");
 			StartCoroutine("SoundInc");
 		}
 

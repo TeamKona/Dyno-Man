@@ -5,7 +5,7 @@ public class Bomb : MonoBehaviour {
 
 
 	public bool silBombEnabled = false;
-	public float bombFuse = 2.5f;
+	public float bombFuse = 3;
 	public int expAreaNorm = 3;
 	public GameObject spawnExplosion;
 	public GameObject spawnSilentExplosion;
@@ -14,14 +14,14 @@ public class Bomb : MonoBehaviour {
 	void Start () {
 	
 		StartCoroutine("BombTimer");
-
-
+		spawnExplosion = Resources.Load<GameObject>("Prefabs/Explosion");
+		spawnSilentExplosion = Resources.Load<GameObject>("Prefabs/SilentExplosion");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 
+		transform.Rotate(Vector3.up, 200 * Time.deltaTime);
 	}
 
 	IEnumerator BombTimer (){

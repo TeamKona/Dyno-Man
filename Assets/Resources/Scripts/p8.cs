@@ -15,7 +15,7 @@ public class p8 : MonoBehaviour {
 
 	//Deny player movement if detects obstacle
 	void OnTriggerStay (Collider other){
-		if (other.gameObject.name == "Wall" || other.gameObject.name == "Cube1"){
+		if (other.gameObject.name == "Wall" || other.gameObject.name == "Cube1" || other.gameObject.name == "Break"){
 			GameObject.Find("Player").GetComponent<PlayerMovement>().canMove = false;
 		}
 	}

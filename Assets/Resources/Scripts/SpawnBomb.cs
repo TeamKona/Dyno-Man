@@ -14,8 +14,8 @@ public class SpawnBomb : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-
-
+		bomb = Resources.Load<GameObject>("Prefabs/Bomb");
+		BombEx = Resources.Load<GameObject>("Prefabs/BombEx");
 	}
 	
 	// Update is called once per frame

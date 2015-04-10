@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	public float speed = 500;
+	public float speed = 300;
 	private GameObject p8;
 	private Vector3 p8position = new Vector3(0, 0, 0);
 	public bool isMoving = false;
@@ -46,7 +46,6 @@ public class PlayerMovement : MonoBehaviour {
 
 			StartCoroutine("Respawn");
 		}
-
 	}
 
 	IEnumerator Respawn () {
@@ -56,7 +55,8 @@ public class PlayerMovement : MonoBehaviour {
 			GameObject.Find("Level").GetComponent<Score>().scoreNum++;
 			yield return new WaitForSeconds(3);
 			alive = true;
-			transform.position = new Vector3(0,0,0);
+			transform.position = GameObject.Find("SpawnPoint").transform.position;
+			transform.rotation = GameObject.Find("SpawnPoint").transform.rotation;
 			respawning = false;
 
 		}
