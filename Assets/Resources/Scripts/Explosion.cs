@@ -91,6 +91,18 @@ public class Explosion : MonoBehaviour {
 			col.gameObject.transform.position = new Vector3(transform.position.x,transform.position.y-100,transform.position.z);
 		}
 
+		if(col.gameObject.name == "Bomb(Clone)")
+		{
+			Debug.Log("COMBO TIME");
+			col.gameObject.GetComponent<Bomb>().bombFuse = 0;
+			col.gameObject.GetComponent<Bomb>().StartCoroutine("BombTimer");
+		}
+
+		if(col.gameObject.name == "BombEx(Clone)")
+		{
+			col.gameObject.GetComponent<BombEx>().bombFuse = 0;
+			col.gameObject.GetComponent<BombEx>().StartCoroutine("BombTimer");
+		}
 	}
 	
 
